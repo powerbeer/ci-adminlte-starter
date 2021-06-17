@@ -6,8 +6,8 @@ if (!defined('BASEPATH'))
 class Tbl_defalte_Model extends CI_Model {
 
     public $CI;
-    public $config_model = array();
     public $db_conn;
+    public $config_model = array(); 
     private $field_allow;
 
     function __construct() {
@@ -56,15 +56,7 @@ class Tbl_defalte_Model extends CI_Model {
             $this->field_allow = $this->config_model['field_allow'];
         }
     }
-
-    public function set_date($param, $value) { 
-        if (isset($value)) {
-            // var_dump($data);
-            // exit();
-            $this->db_conn->set("$param", "to_date('" . $value . "','dd/mm/yyyy')", FALSE);
-//            unset($data['ASSESSMENT_DATE']);
-        }
-    }
+ 
 
     public function query($sql) {
 
@@ -181,7 +173,7 @@ class Tbl_defalte_Model extends CI_Model {
     public function create($data) {
         //set date ////
 
-        $data['insert_date'] = date('Y-m-d H:i:s');
+        $data['create_date'] = date('Y-m-d H:i:s');
         $data['update_date'] = date('Y-m-d H:i:s');
         $this->db_conn->insert($this->config_model['table_name'], $data);
 
@@ -329,13 +321,14 @@ class Tbl_defalte_Model extends CI_Model {
         }
 //          echo $sql;
         $query = $this->db_conn->query($sql)->row();
-        return $query->TOTAL_ROW;
+        return $query->total_row;
     }
 
     public function count_all() {
         $this->db_conn->from($this->config_model['table_name']);
         return $this->db_conn->count_all_results();
     }
+    
 
     public function list_table($sql_addon, $pageno = "1", $order_by = "1", $order_type = "asc") {
 

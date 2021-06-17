@@ -6,6 +6,6 @@ class Test extends CI_Controller {
 	 
 	public function test_template()
 	{
-		$this->load->view('/template/template-page');
+		$this->load->view(TEMPLATE_PAGE_IFRAME);
 	}
 }

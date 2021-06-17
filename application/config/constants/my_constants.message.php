@@ -1,18 +1,9 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-/*
- * custom constant file 
- * Create by powerbeer
- * 
- */
  
 
-define('AUTH_CLASS_PUBLIC', json_encode(array("login", "logout", "register", "forgotpassword")));
-
-//Page
-define('LOGIN_PAGE', 'login'); // login
-
+ 
 define('MASSAGE_STATUS', 'message_status'); // success
 
 define('STATUS_SUCCESS', 'success'); // success
@@ -23,17 +14,7 @@ define('STATUS_ERROR', 'error'); //   errors
 define('LOG_WITH_SYSTEM', 1); //   errors
 define('LOG_WITH_USER', 2); //   errors
 //
-//
-//template
-define('TEMPLATE_BLANK', 'template/template-blank'); // success
-define('TEMPLATE_PAGE', 'template/template-page'); // success
-define('TEMPLATE_FRONTPAGE', 'template/template-frontpage'); // success
-//ui definde
-define('ALERT_SUCCESS', 'alert-success');
-define('ALERT_DANGER', 'alert-danger');
-define('ALERT_WARNING', 'alert-warning');
-
-
+ 
 //message
 define('MESSAGE_CREATE_COMPLETE', 'บันทึกข้อมูลเรียบร้อย');
 define('MESSAGE_UPDATE_COMPLETE', 'ปรับปรุงข้อมูลเรียบร้อย');
