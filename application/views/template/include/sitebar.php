@@ -13,7 +13,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
 
-
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
@@ -90,33 +89,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </ul>
             </li>
             <li class="nav-header">ตั้งค่าระบบ</li>
-            <li class="nav-item">
-                <a href="pages/calendar.html" class="nav-link">
-                    <i class="nav-icon far fa-users"></i>
+             <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-table"></i>
                     <p>
-                        ข้อมูลผู้ใช้งาน
-                        <span class="badge badge-info right">2</span>
+                        บริหารร้านค้า
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-            </li> 
-            <li class="nav-item">
-                <a href="pages/calendar.html" class="nav-link">
-                    <i class="nav-icon far fa-users"></i>
-                    <p>
-                        ร้านค้า
-                        <span class="badge badge-info right">2</span>
-                    </p>
-                </a>
-            </li> 
-            <li class="nav-item">
-                <a href="pages/calendar.html" class="nav-link">
-                    <i class="nav-icon far fa-users"></i>
-                    <p>
-                        สาขา
-                        <span class="badge badge-info right">2</span>
-                    </p>
-                </a>
-            </li> 
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="pages/tables/simple.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>พนักงาน</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/tables/data.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>ลูกค้า</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/tables/jsgrid.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>ผู้ผลิต</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

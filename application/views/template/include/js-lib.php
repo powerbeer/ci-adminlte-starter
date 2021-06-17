@@ -14,8 +14,11 @@
 <!-- jquery-validation -->
 <script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="assets/plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- pace-progress -->
+<script src="assets/plugins/pace-progress/pace.min.js"></script>
+
+<script src="assets/js/ajax_utils.min.js"></script>
+<script src="assets/js/webui_utils.min.js"></script>
 
 <!-- AdminLTE App -->
-<script src="assets/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="assets/dist/js/demo.js"></script>
+<script src="assets/dist/js/adminlte.min.js"></script> 
