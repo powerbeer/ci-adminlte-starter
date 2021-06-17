@@ -14,6 +14,15 @@
 <!-- jquery-validation -->
 <script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="assets/plugins/jquery-validation/additional-methods.min.js"></script>
+
+<script src="assets/plugins/formvalidation/formValidation.min.js"></script> 
+<script src="assets/plugins/formvalidation/framework/bootstrap4.min.js"></script> 
+<script src="assets/plugins/hotkeys/jquery.hotkeys.min.js"></script>
+<script src="assets/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
+<script src="assets/plugins/formvalidation/formValidation.min.js"></script> 
+<script src="assets/plugins/formvalidation/framework/bootstrap4.min.js"></script>
+<script src="assets/plugins/toastr/toastr.min.js"></script>
+
 <!-- pace-progress -->
 <script src="assets/plugins/pace-progress/pace.min.js"></script>
 

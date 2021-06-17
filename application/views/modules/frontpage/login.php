@@ -1,5 +1,5 @@
 <?php
-   $form_id = create_form_id();
+$form_id = create_form_id();
 ?>
 <div class="login-box">
     <!-- /.login-logo -->
@@ -11,16 +11,16 @@
             <p class="login-box-msg">กรุณาเข้าระบบ</p>
 
             <form  id="<?php echo $form_id; ?>" name="<?php echo $form_id; ?>" >
-                <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
+                <div class="input-group mb-3 form-group">
+                    <input type="text" class="form-control" placeholder="username" id="username" name="username">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password">
+                <div class="input-group form-group  mb-3">
+                    <input type="password" class="form-control" placeholder="กรอกรหัสผ่าน" id="password" name="password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -50,8 +50,7 @@
 <!-- /.login-box -->
 
 <script>
-        <?php
-            generate_validate($form_id, 'btnSubmit', 'ccc', $arr_validators_field);
-        
-        ?>
+<?php
+generate_validate($form_id, 'btnSubmit', $url_post, $arr_validators_field);
+?>
 </script>

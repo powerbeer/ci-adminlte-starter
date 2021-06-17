@@ -23,7 +23,7 @@ class Authen_session {
         $data_where = array(
             'username' => $username,
         );
-        $query = $this->CI->User_Model->get_one_row_where($data_where);
+        $query = $this->CI->user_Model->get_one_row_where($data_where);
 
         if ($query->num_rows() == 1) {
             $row = $query->row();

@@ -16,4 +16,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link rel="stylesheet" href="assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
 <!-- pace-progress -->
-<link rel="stylesheet" href="assets/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
+<link rel="stylesheet" href="assets/plugins/pace-progress/themes/blue/pace-theme-flat-top.css">
+
+<link rel="stylesheet" href="assets/plugins/formvalidation/formValidation.min.css" >
+<link rel="stylesheet" href="assets/plugins/formvalidation/validation-boostrap.min.css" >
+<link rel="stylesheet" href="assets/plugins/bootstrap-sweetalert/sweetalert.min.css" >
+ 
+
+<link rel="stylesheet" href="assets/plugins/jquery-upload-file/css/uploadfile.min.css"   />  
+<link rel="stylesheet" href="assets/plugins/blueimp-file-upload/jquery.fileupload.min.css"   />  
+
+
+ <link rel="stylesheet" href="assets/plugins/toastr/toastr.min.css"   />  
