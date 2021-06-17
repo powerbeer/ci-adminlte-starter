@@ -1,16 +1,22 @@
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+$authen = $this->session->userdata(SESSION_AUTHEN);
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?php $this->load->view("template/include/header-lib"); ?> 
+        <?php $this->load->view("template/include/css-lib"); ?> 
+        <?php $this->load->view("template/include/js-lib"); ?> 
     </head>
-    <body class="hold-transition login-page">
+    <body  class="main" >
         <?php
         if (isset($page)) {
             $this->load->view("/modules/" . $page);
         }
         ?>
-
-        <?php $this->load->view("template/include/footer-lib"); ?> 
+       
+        <script>
+            createModalDiv();
+        </script>
     </body>
 </html>

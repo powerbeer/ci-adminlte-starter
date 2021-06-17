@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
 if (!function_exists('create_form_id')) {
 
     function create_form_id() {
-        $html = "f_" . rand(100, 200);
+        $html = "f_" . rand(100, 10000);
         return $html;
     }
 

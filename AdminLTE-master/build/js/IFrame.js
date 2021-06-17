@@ -52,7 +52,7 @@ const Default = {
   autoItemActive: true,
   autoShowNewTab: true,
   allowDuplicates: false,
-  loadingScreen: true,
+  loadingScreen: false,
   useNavbarItems: true,
   scrollOffset: 40,
   scrollBehaviorSwap: false,

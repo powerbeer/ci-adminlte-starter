@@ -1182,7 +1182,7 @@
     autoItemActive: true,
     autoShowNewTab: true,
     allowDuplicates: false,
-    loadingScreen: true,
+    loadingScreen: false,
     useNavbarItems: true,
     scrollOffset: 40,
     scrollBehaviorSwap: false,
@@ -1236,18 +1236,18 @@
       if (autoOpen) {
         if (this._config.loadingScreen) {
           var $loadingScreen = $__default['default'](SELECTOR_TAB_LOADING);
-          $loadingScreen.fadeIn();
+         // $loadingScreen.fadeIn();
           $__default['default'](tabId + " iframe").ready(function () {
             if (typeof _this._config.loadingScreen === 'number') {
               _this.switchTab("#" + navId);
 
               setTimeout(function () {
-                $loadingScreen.fadeOut();
+              //  $loadingScreen.fadeOut();
               }, _this._config.loadingScreen);
             } else {
               _this.switchTab("#" + navId);
 
-              $loadingScreen.fadeOut();
+            //  $loadingScreen.fadeOut();
             }
           });
         } else {

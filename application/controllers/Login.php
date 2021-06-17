@@ -11,9 +11,9 @@ class Login extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        
+
         $this->load->library('Authen_session', null, "authen_session");
-        
+
         $this->data = array();
 
         $this->init();
@@ -42,7 +42,7 @@ class Login extends CI_Controller {
     }
 
     public function checkLogin() {
-        
+
         header('Content-Type: application/json');
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata);

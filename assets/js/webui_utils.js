@@ -1,46 +1,46 @@
 $(document).ready(function () {
 
-   
-   $.copyForm=function(copyId,copyToId){ 
-         $("#"+copyToId).val($("#"+copyId).val());
-   }
-   
+
+    $.copyForm = function (copyId, copyToId) {
+        $("#" + copyToId).val($("#" + copyId).val());
+    }
+
     $.addSelectOption = function (id_select, optionValue, optionText) {
         $('#' + id_select).append('<option value="' + optionValue + '"  >' + optionText + '</option>');
     }
 
-  
-    $.messageAlert = function (alert_lib, message_type, vtitle, messsage,url_redirect) {
+
+    $.messageAlert = function (alert_lib, message_type, vtitle, messsage, url_redirect) {
         if (alert_lib == 'swal') {
-            console.log("url_redirect=="+url_redirect);
-            if(typeof(url_redirect) != "undefined"){
-                swal({ 
+            console.log("url_redirect==" + url_redirect);
+            if (typeof (url_redirect) != "undefined") {
+                swal({
                     icon: message_type,
-                    title:vtitle,
-                    text:messsage
-                }, function() {
+                    title: vtitle,
+                    text: messsage
+                }, function () {
                     window.location = url_redirect;
                 });
-            }else{
-                 swal({ 
+            } else {
+                swal({
                     icon: message_type,
-                    title:vtitle,
-                    text:messsage
+                    title: vtitle,
+                    text: messsage
                 });
             }
-       }else if (alert_lib == 'swal_html') {
-           // console.log("show swal html!!");
-            swal({ 
+        } else if (alert_lib == 'swal_html') {
+            // console.log("show swal html!!");
+            swal({
                 icon: message_type,
-                title:vtitle,
+                title: vtitle,
                 content: {
-                        element: 'div',
-                        innerHTML: messsage
-                        } 
+                    element: 'div',
+                    innerHTML: messsage
                 }
+            }
             );
         } else if (alert_lib == 'swal_not_click') {
-           // console.log("show swal_not_click");
+            // console.log("show swal_not_click");
             swal({
                 title: messsage,
                 showCancelButton: false,
@@ -74,14 +74,20 @@ $(document).ready(function () {
         });
 
     }
-    
-     
-    
-    $.clear_modal_backdrop=function(){
-       $('.modal-backdrop' ).remove();
+
+
+
+ $.clear_modal_backdrop = function () {
+        $('.modal-backdrop').remove();
     }
 });
 
+function openURLModal(vurl){
+      $('#id_modal').load(url, function () {
+        console.log("load url success!!!!");
+    });
+
+}
 
 
 function loadHtml(id_, html) {
@@ -90,12 +96,12 @@ function loadHtml(id_, html) {
 
 function createModalDiv() {
     //console.log("########createModalDiv########");
-    $(".animsition").prepend("<div id=\"id_modal\"></div>");
+    $(".main").prepend("<div id=\"id_modal\"></div>");
 
 }
 
 function loadURLModalJS(url) {
-   // console.log("########loadURLModal ########" + url);
+    // console.log("########loadURLModal ########" + url);
     $('#id_modal').load(url, function () {
         console.log("load url success!!!!");
     });
@@ -109,12 +115,12 @@ function loadTable(url, id_table) {
     });
 }
 
-function gotoURL(v_main_url,v_sub_url){
-    window.document.location.href=v_main_url + v_sub_url;
+function gotoURL(v_main_url, v_sub_url) {
+    window.document.location.href = v_main_url + v_sub_url;
 }
 
-function gotoURLPage(v_url){
-    window.document.location.href=v_url;
+function gotoURLPage(v_url) {
+    window.document.location.href = v_url;
 }
 
 
@@ -166,9 +172,6 @@ function ResizeImage(id_resize) {
     } else {
         alert('The File APIs are not fully supported in this browser.');
     }
-    
+
 }
-
-
-$(document).ready(function(){$("#id_hamburger").click(function(){$.get("App/Setting?type=fold",function(n){})})}); 
 
