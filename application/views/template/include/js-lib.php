@@ -23,6 +23,9 @@
 <script src="assets/plugins/formvalidation/framework/bootstrap4.min.js"></script>
 <script src="assets/plugins/toastr/toastr.min.js"></script>
 
+<!-- Select2 -->
+<script src="assets/plugins/select2/js/select2.full.min.js"></script>
+
 <!-- pace-progress -->
 <script src="assets/plugins/pace-progress/pace.min.js"></script>
 

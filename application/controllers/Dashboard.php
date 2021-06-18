@@ -6,6 +6,6 @@ class Dashboard extends CI_Controller {
 	 
 	public function welcome()
 	{
-		$this->load->view(TEMPLATE_PAGE_IFRAME);
+		$this->load->view(TEMPLATE_PAGE);
 	}
 }

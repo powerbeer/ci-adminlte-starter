@@ -66,7 +66,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-widget="fullscreen" href="javascript:void(0)" role="button">
+            <a class="nav-link"   href="<?php echo site_url("Logout"); ?>" role="button">
                 <i class="fas fa-sign-out"></i>
             </a>
         </li>

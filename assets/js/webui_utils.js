@@ -83,7 +83,7 @@ $(document).ready(function () {
 });
 
 function openURLModal(vurl){
-      $('#id_modal').load(url, function () {
+      $('#id_modal').load(vurl, function () {
         console.log("load url success!!!!");
     });
 
@@ -114,12 +114,9 @@ function loadTable(url, id_table) {
 
     });
 }
+ 
 
-function gotoURL(v_main_url, v_sub_url) {
-    window.document.location.href = v_main_url + v_sub_url;
-}
-
-function gotoURLPage(v_url) {
+function gotoURL(v_url) {
     window.document.location.href = v_url;
 }
 

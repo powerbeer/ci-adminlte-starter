@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('session','database',"ugly/ugly"=>"ugly","WebUtils"=>"web_utils");
+$autoload['libraries'] = array('session','database',"ugly/ugly"=>"ugly","Authen_check","WebUtils"=>"web_utils","DataTableUtils"=>"datatable_utils");
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','file','string' ,'security','validateui','formui','modalui');
+$autoload['helper'] = array('url','file','string' ,'security','validateui','formui','modalui','select2ui','datatableui');
 
 /*
 | -------------------------------------------------------------------

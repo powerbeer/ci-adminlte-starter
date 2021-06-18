@@ -36,30 +36,7 @@ $authen = $this->session->userdata(SESSION_AUTHEN);
                         <span class="right badge badge-danger">New</span>
                     </p>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-chart-pie"></i>
-                    <p>
-                        ประจำวัน
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="./index2.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>รายการค้างจ่าย</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./index3.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>ตั้งค่า</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>  
+            </li> 
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
@@ -108,7 +85,7 @@ $authen = $this->session->userdata(SESSION_AUTHEN);
                     <li class="nav-item">
                         <a href="pages/tables/data.html" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>ลูกค้า</p>
+                            <p>ลูกค้า/คู่ค้า</p>
                         </a>
                     </li>
                     <li class="nav-item">

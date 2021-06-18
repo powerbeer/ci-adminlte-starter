@@ -16,23 +16,7 @@ class Tbl_defalte_Model extends CI_Model {
         $this->db_conn = $this->db;
     }
 
-    public function getDB_Conn() {
-        return $this->db_conn;
-    }
-
-    public function setDB_User($db_user) {
-        $this->db_conn = $this->CI->load->database($db_user, TRUE);
-    }
-
-    public function setDB_Config($configdb) {
-        $this->db_conn = $this->CI->load->database($configdb, TRUE);
-    }
-
-    public function getDB_Config() {
-
-        return $this->config_model;
-    }
-
+   
     public function config($config_ = array()) {
         /*
          * field_allow= array("field1","field2");
@@ -372,7 +356,8 @@ class Tbl_defalte_Model extends CI_Model {
         //echo $sql;
 
         $query = $this->db_conn->query($sql);
-
+        
+        
         $list_data = array(
             'total_rows' => $total_rows,
             'total_pages' => $total_pages,

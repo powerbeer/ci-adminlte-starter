@@ -36,14 +36,21 @@ if (!function_exists('form_search')) {
 
 if (!function_exists('form_input')) {
 
-    function form_input($id, $name, $label, $value = "", $placeholder = "", $config = array()) {
+    function form_input($id, $name, $label, $value = "", $config = array()) {
+
         $max_length_text = '';
+        $require_text='';
+        $placeholder = @$config['placeholder'];
+        $require=@$config['require'];
         $type = @$config['type'];
         $readonly = @$config['readonly'];
         if ($readonly == true) {
             $readonly = 'readonly';
         } else {
             $readonly = '';
+        }
+        if($require==true){
+            $require_text='<label class="red">*</label>';
         }
         if (empty($type)) {
             $type = 'text';
@@ -55,9 +62,10 @@ if (!function_exists('form_input')) {
             $max_length_text = 'maxlength="255"';
         }
         $html = '
-                        <label class="form-control-label" for="' . $id . '">' . $label . '</label>
-                        <input type="' . $type . '" class="form-control" id="' . $id . '" name="' . $name . '"
-                               placeholder="' . $placeholder . '"  ' . $readonly . '   value="' . $value . '" ' . $max_length_text . '   />';
+            <div class="form-group">
+                            <label for="' . $id . '">' . $label . ' '. $require_text. ' </label>
+                            <input type="' . $type . '" class="form-control" id="' . $id . '" name="' . $name . '" placeholder="' . $placeholder . '"  ' . $readonly . '   value="' . $value . '" ' . $max_length_text . '  autocomplete="off"  />
+                        </div> ';
         return $html;
     }
 
@@ -70,8 +78,9 @@ if (!function_exists('form_input_html')) {
     function form_input_html($id, $label, $html) {
 
         $html = '
-                        <label class="form-control-label" for="' . $id . '">' . $label . '</label>
-                        ' . $html;
+                           <div class="form-group">
+                            <label for="' . $id . '">' . $label . '</label>
+                        ' . $html  .'  </div> ';
         return $html;
     }
 

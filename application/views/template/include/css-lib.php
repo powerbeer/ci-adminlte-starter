@@ -12,6 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link rel="stylesheet" href="assets/fonts/font-awesome/font-awesome.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+
+<link rel="stylesheet" href="assets/dist/css/adminlte-extend.min.css">
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
@@ -21,10 +23,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link rel="stylesheet" href="assets/plugins/formvalidation/formValidation.min.css" >
 <link rel="stylesheet" href="assets/plugins/formvalidation/validation-boostrap.min.css" >
 <link rel="stylesheet" href="assets/plugins/bootstrap-sweetalert/sweetalert.min.css" >
- 
+
 
 <link rel="stylesheet" href="assets/plugins/jquery-upload-file/css/uploadfile.min.css"   />  
 <link rel="stylesheet" href="assets/plugins/blueimp-file-upload/jquery.fileupload.min.css"   />  
 
+<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
- <link rel="stylesheet" href="assets/plugins/toastr/toastr.min.css"   />  
+
+<link rel="stylesheet" href="assets/plugins/toastr/toastr.min.css"   />  

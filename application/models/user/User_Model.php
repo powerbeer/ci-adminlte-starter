@@ -9,7 +9,7 @@ class User_Model extends tbl_defalte_Model {
     private $field_pk = "user_id";  // PK
     private $field_status = "user_status";  // field status
     private $field_allow = array("user_id","username");
-    private $field_datatable="fullname,username,password,email,mobile_phone";
+    private $field_datatable="fullname,username,user_group_id,password_hash,email,mobile_phone";
     private $order_by="INSERT_DATE";
 
     function __construct() {
