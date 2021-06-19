@@ -35,5 +35,14 @@ define("PER_PAGE", 20);
 
 
 define('L_USER_STATUS', json_encode(array("1"=>"ใช้งาน","2"=>"ถูกระงับชั่วคราว")));
+
+
+
+define('TITLE_FORM', json_encode(
+                array(
+                    CMD_CREATE => "สร้างข้อมูลใหม่",
+                    CMD_UPDATE => "แก้ไขข้อมูล"
+                )
+));
  
 ?>

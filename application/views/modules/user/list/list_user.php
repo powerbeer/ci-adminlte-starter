@@ -22,15 +22,8 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        <div class="input-group  w-300"  >
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="ค้นหาข้อมูล">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
+                          <?php echo  form_search(base_url(uri_string()),$search_text); ?>
+                        
                     </h3>
 
                     <div class="card-tools">
@@ -68,13 +61,14 @@
                             $offset = $datatable['offset'];
                             $result = $datatable['result'];
                           //  var_dump($result);
+                            
                             for ($i = 0; $i < count($result); $i++) {
                                 $row=$result[$i];
                                 $id=$row->user_id;
                                 ?>
                                 <tbody>
                                     <tr>
-                                        <td><?php echo $offset+1; ?></td>
+                                        <td><?php echo ++$offset; ?></td>
                                         <td><?php echo $row->fullname;  ?></td>
                                         <td><?php echo $row->user_group_id;  ?></td>
                                         <td><?php echo $row->username;  ?></td>

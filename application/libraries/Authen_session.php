@@ -33,7 +33,8 @@ class Authen_session {
                 $user_id = $row->user_id;
 
                 $user_data = array(
-                    SESSION_AUTHEN => $row
+                    SESSION_AUTHEN => $row,
+                    SESSION_FOLDER_RESOURCE=>"storage"
                 );
 
                 // var_dump($user_data);

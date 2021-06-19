@@ -18,18 +18,18 @@ if (!function_exists('form_search')) {
 
     function form_search($url, $search_text = "") {
 
-        $html = '
-            <div class="col-md-8 pl-0 hidden-sm-down  ">
-            <form class="form-inline" method="POST" action="' . $url . '"> 
-                <div class="form-group ">
-                    <div class="input-search ">
-                        <button type="submit" class="input-search-btn"><i class="icon wb-search" aria-hidden="true"></i></button>
-                        <input type="text" class="form-control form-control-lg" name="search_text"  id="search_text" value="' . $search_text . '"   placeholder="พิมพ์ข้อความที่ต้องการค้นหา">
-                    </div>
-                </div>
-            </form> 
-        </div>';
-        return $html;
+        $html ='<div class="input-group  w-300"  >
+              <form class="form-inline" method="POST" action="' . $url . '"> 
+                            <input type="text"  name="search_text"  id="search_text" value="' . $search_text . '"   class="form-control float-right" placeholder="ค้นหาข้อมูล">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            </form>
+                        </div>';
+        return $html; 
     }
 
 }

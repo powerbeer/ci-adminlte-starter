@@ -11,12 +11,12 @@ class Test extends CI_Controller {
     public function create_defalte_user() {
         $this->load->model('user/User_Model', 'user_Model');
 
-        $new_password = 'gank001';
+        $new_password = 'admin';
         $data_update = array(
             'fullname' => 'admin ระบบ',
             'password_hash' => password_hash($new_password, PASSWORD_DEFAULT),
-            'email' => 'powerbeer@gmail.com',
-            'username' => 'powerbeer',
+            'email' => 'admin.com',
+            'username' => 'admin',
             'mobile_phone' => '0835356006'
         );
 

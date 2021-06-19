@@ -112,9 +112,9 @@ class Select2Utils {
 
     private function getValue($config, $select_value = "") {
         $value = "";
-        if ($select_value != '') {
+        if (!empty($select_value) ) {
             $sql = "select " . $config['desc'] . " as dsc from " . $config['table'] . " WHERE " . $config['id'] . "= '" . $select_value . "'  limit 1 ";
-            //  echo $sql;
+             
             $row = $this->db_resource->query($sql)->row();
             //  var_dump($row);exit();
             return @$row->dsc;
@@ -135,7 +135,7 @@ class Select2Utils {
         }
 
         $readonly_html = '';
-
+        $desc='';
         if (!empty($select_value)) {
             $desc = $this->getValue($config, $select_value);
             //   var_dump($desc); exit();
@@ -154,7 +154,7 @@ class Select2Utils {
         }
 
         $html = $readonly_html . '<select class="form-control  select2  select2-allow-clear "  ' . $multiple_html . '  name="' . $config['name'] . '" id="' . $config['name'] . '"   ' . $required . '  > ';
-        if ($select_value != "") {
+        if (!empty($select_value)) {
             $html .= '<option value="' . $select_value . '" selected>' . $desc . '</option>';
         }
         $html .= '</select> ';
@@ -168,7 +168,7 @@ class Select2Utils {
         $data = array();
         $config_ = $config;
         //     $config_ajax = $this->config($db, $config_);
-        $gen_html_select2 = $this->CI->select2utils->gen_html($config_, $value_select);
+        $gen_html_select2 = $this->gen_html($config_, $value_select);
 
         $data['html'] = $gen_html_select2;
         $data['config'] = $config_;

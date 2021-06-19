@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <!-- pace-progress -->
 <link rel="stylesheet" href="assets/plugins/pace-progress/themes/blue/pace-theme-flat-top.css">
-
+<link rel="stylesheet" href="assets/plugins/dropify/dropify.min.css">
 <link rel="stylesheet" href="assets/plugins/formvalidation/formValidation.min.css" >
 <link rel="stylesheet" href="assets/plugins/formvalidation/validation-boostrap.min.css" >
 <link rel="stylesheet" href="assets/plugins/bootstrap-sweetalert/sweetalert.min.css" >

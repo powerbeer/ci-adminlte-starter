@@ -9,34 +9,38 @@ class UploadUtils {
     private $path_allow = array("userdata");
     private $file_ext_allow = array("jpg", "pdf", "jpeg");
     private $file_store_code;
-    private $SESSION_FILE_STORE_CODE = "FILE_STORE_CODE";
+    
+    private $authen;
     private $staffid;
-    private $session_code="SESSION_CODE";
+    private $session_code = "SESSION_CODE";
+    private $root_path;
 
     function __construct() {
         $this->CI = & get_instance();
-        $this->CI->load->model('global/Tbl_filestore_Model', 'tbl_filestore_Model');
-        $this->staffid = $this->CI->session->userdata(SESSION_USER_ID);
+        $this->CI->load->model('global/Filestore_Model', 'filestore_Model');
+        $this->authen = $this->CI->session->userdata(SESSION_AUTHEN);
+        $this->root_path=  FCPATH;
     }
 
     public function config($config) {
         $data = array();
         $data['upload_path'] = $config['upload_path'];
-        if(isset($config['file_ext_allow'])){
-            $this->file_ext_allow=$config['file_ext_allow'];
+        if (isset($config['file_ext_allow'])) {
+            $this->file_ext_allow = $config['file_ext_allow'];
         }
         return $data;
     }
 
-    public function create_session($file_store_code = "",$session_code="") {
-        if ($file_store_code == '') {
-            $file_store_code = $this->CI->webutils->randomCode(20);
+    public function create_session($file_store_code = "", $session_code = "") {
+        if (empty($file_store_code)) {
+            $file_store_code = $this->CI->web_utils->randomCode(20);
         }
-        
-        if(empty($session_code)){
-             $session_code = $this->CI->webutils->randomCode(20);
+
+        if (empty($session_code)) {
+            $session_code = $this->CI->web_utils->randomCode(20);
         }
-        $user_data = array(SESSION_FILE_LIST => array($this->SESSION_FILE_STORE_CODE => $file_store_code), SESSION_FILE_LIST_DELETE => array());
+        $user_data = array(SESSION_FILE_LIST => array(SESSION_FILE_STORE_CODE => $file_store_code), SESSION_FILE_LIST_DELETE => array());
+        //  var_dump($user_data);exit();
         $this->CI->session->set_userdata($user_data);
         //return $user_data['']
     }
@@ -53,7 +57,7 @@ class UploadUtils {
 
     public function getFileStoreCode() {
         $file_list_store = (Array) $this->CI->session->userdata(SESSION_FILE_LIST);
-        $code = @$file_list_store[$this->SESSION_FILE_STORE_CODE];
+        $code = @$file_list_store[SESSION_FILE_STORE_CODE];
         //var_dump($code);
         return $code;
     }
@@ -70,30 +74,32 @@ class UploadUtils {
         // $file_list_store;
         $file_list = @$file_list_store['FILE_LIST'];
         $file_list_delete = (Array) $this->CI->session->userdata(SESSION_FILE_LIST_DELETE);
-        //var_dump($file_list);
+        //     var_dump($file_list);
         //
-       // exit();
+        //    exit();
         $file_list_new = array();
         $ret = array();
-        for ($i = 0; $i < count($file_list); $i++) {
-            $is_delete = in_array($file_list[$i], $file_list_delete);
-            //var_dump($is_delete);
+        if (is_array($file_list)) {
+            for ($i = 0; $i < count($file_list); $i++) {
+                $is_delete = in_array($file_list[$i], $file_list_delete);
+                //var_dump($is_delete);
 
-            if ($is_delete == true) {
-                //  unset($file_list[$i]);
-            } else {
-                $file_list_new[] = $file_list[$i];
+                if ($is_delete == true) {
+                    //  unset($file_list[$i]);
+                } else {
+                    $file_list_new[] = $file_list[$i];
 
-                $file_name = $file_list[$i];
-                $path = $config['upload_path_tmp'];
-                $filePath = $path . DIRECTORY_SEPARATOR . $file_name;
-                if (file_exists($filePath)) {
-                    $details = array();
-                    $details['name'] = $file_name;
-                    $details['path'] = $path;
-                    $details['full_path'] = $filePath;
-                    $details['size'] = @filesize($filePath);
-                    $ret[] = $details;
+                    $file_name = $file_list[$i];
+                    $path = $config['upload_path_tmp'];
+                    $filePath = $path . DIRECTORY_SEPARATOR . $file_name;
+                    if (file_exists($filePath)) {
+                        $details = array();
+                        $details['name'] = $file_name;
+                        $details['path'] = $path;
+                        $details['full_path'] = $filePath;
+                        $details['size'] = @filesize($filePath);
+                        $ret[] = $details;
+                    }
                 }
             }
         }
@@ -111,14 +117,14 @@ class UploadUtils {
     public function gen_html($config) {
         // $desc=$this->getValue($select_value);
 
-        $html = '<div id="' . $config['id'] . '">แนบไฟล์</div><p class="required font-size-10">*ชนิดไฟล์ที่สามารถรองรับคือ '. implode(",",$this->file_ext_allow) .' เท่านั้น</p>';
+        $html = '<div id="' . $config['id'] . '">แนบไฟล์</div><p class="required font-size-10">*ชนิดไฟล์ที่สามารถรองรับคือ ' . implode(",", $this->file_ext_allow) . ' เท่านั้น</p>';
         return $html;
     }
 
     public function ListFile($file_store_code = "") {
 
         $ret = array();
-        $list_file_data = $this->CI->tbl_filestore_Model->get_all($file_store_code);
+        $list_file_data = $this->CI->filestore_Model->get_all($file_store_code);
 
         //var_dump($list_file_data);
         //$dir = $config['upload_path'];
@@ -126,16 +132,16 @@ class UploadUtils {
             $i = 0;
             foreach ($list_file_data->result() as $row) {
                 //  for ($i = 0; $i < count($list_file_data); $i++) {
-                $file_name = $row->FILE_NAME;
-                $file_name_th = $row->FILE_NAME_DESC;
-                $path = $row->FILE_STORE_PATH;
+                $file_name = $row->file_name;
+                $file_name_th = $row->file_name_th;
+                $path = $row->file_store_path;
                 $filePath = $path . DIRECTORY_SEPARATOR . $file_name;
                 $details = array();
                 $details['name'] = $file_name;
                 $details['name_th'] = $file_name_th;
                 $details['path'] = $path;
                 $details['full_path'] = $filePath;
-                $details['size'] = @filesize($filePath);
+                $details['size'] = @filesize( $filePath);
                 $ret[] = $details;
             }
         } else {
@@ -147,16 +153,17 @@ class UploadUtils {
     }
 
     public function Delete($config = array()) {
+        
+        $file_store_code=$this->getFileStoreCode();
 
         $file_list_delete = (Array) $this->CI->session->userdata(SESSION_FILE_LIST_DELETE);
-
-        // var_dump($file_list_delete);
+      //var_dump($file_list_delete);
 
         $upload_path_tmp = $config['upload_path_tmp'];
         $output_dir_tmp = $upload_path_tmp . DIRECTORY_SEPARATOR;
 
         $upload_path = @$config['upload_path'];
-        $output_dir = $upload_path . DIRECTORY_SEPARATOR;
+        $output_dir = $upload_path . DIRECTORY_SEPARATOR .$file_store_code . DIRECTORY_SEPARATOR;
 
 
         $is_delete = false;
@@ -170,7 +177,9 @@ class UploadUtils {
             $filePath_tmp = $output_dir_tmp . $fileName;
 
             $file_list_delete[] = $fileName;
-
+            /*
+             * หากต้องการลบจริงให้  uncomment 
+            //var_dump($filePath);exit();
             if (file_exists($filePath)) {
                 @unlink($filePath);
                 $is_delete = true;
@@ -179,12 +188,14 @@ class UploadUtils {
                 $is_delete = true;
             }
 
+            */
+            $is_delete=true;
             if ($is_delete == true) {
 
                 $user_data = array(SESSION_FILE_LIST_DELETE => $file_list_delete);
                 $this->CI->session->set_userdata($user_data);
 
-                $exec = $this->CI->tbl_filestore_Model->Remove($this->getFileStoreCode(), $fileName);
+                $exec = $this->CI->filestore_Model->Remove($this->getFileStoreCode(), $fileName);
                 if ($exec['message_status'] == STATUS_SUCCESS) {
                     return "Deleted File Complete : " . $fileName . "<br>";
                 } else {
@@ -196,6 +207,7 @@ class UploadUtils {
 
     public function Download($config = array()) {
         $is_tmp = @$_GET['is_tmp'];
+        $file_store_code= @$this->CI->input->get('file_store_code');
 
         $upload_path_tmp = $config['upload_path_tmp'];
 
@@ -209,8 +221,8 @@ class UploadUtils {
             $fileName = str_replace("..", ".", $fileName); //required. if somebody is trying parent folder files
 
             $file_tmp = $upload_path_tmp . DIRECTORY_SEPARATOR . $fileName;
-            $file = $upload_path . DIRECTORY_SEPARATOR . $fileName;
-
+            $file = $upload_path . DIRECTORY_SEPARATOR .$file_store_code.DIRECTORY_SEPARATOR. $fileName;
+           // var_dump($file);exit();
             $file = str_replace("..", "", $file);
             $file_tmp = str_replace("..", "", $file_tmp);
 
@@ -223,7 +235,7 @@ class UploadUtils {
                 $file = $file_tmp;
             }
 
-            $file_path_encode = $this->CI->webutils->encrypt($file);
+            $file_path_encode = $this->CI->web_utils->encrypt($file);
 
             // exit();
             //  $fileName = str_replace(" ", "", $fileName);
@@ -254,19 +266,19 @@ class UploadUtils {
         $output_dir_tmp = $config['upload_path_tmp'] . DIRECTORY_SEPARATOR;
         $output_dir = $config['upload_path'] . DIRECTORY_SEPARATOR;
         $list_file_ = $this->CI->session->userdata(SESSION_FILE_LIST);
-        
-        $file_store_code = $list_file_[$this->SESSION_FILE_STORE_CODE];
+
+        $file_store_code = $list_file_[SESSION_FILE_STORE_CODE];
         $file_list_store_delete = (Array) @$this->CI->session->userdata(SESSION_FILE_LIST_DELETE);
 
         $list_file = @$list_file_['FILE_LIST'];
         $list_file_th = @$list_file_['FILE_LIST_TH'];
         //    var_dump($list_file);
         //
-   //exit();
+        //exit();
         $upload_complete = 0;
         $upload_fail = 0;
         if (isset($list_file)) {
-            $ret = array(); 
+            $ret = array();
             $ret['file_store_code'] = $file_store_code;
             for ($i = 0; $i < count($list_file); $i++) {
                 $fileName = $list_file[$i];
@@ -274,17 +286,22 @@ class UploadUtils {
                 if (in_array($fileName, $file_list_store_delete)) {
                     continue;
                 }
-
-               
+ 
                 $fullPath_tmp = $output_dir_tmp . $fileName;
 
                 if (file_exists($fullPath_tmp)) {
-                    $fullPath = $output_dir . $fileName;
+                    $filepath = $output_dir . $file_store_code ;
+                    $fullPath = $filepath .DIRECTORY_SEPARATOR. $fileName;
+                    //var_dump($filepath);exit();
+                    if (!is_dir($filepath)) {
+                        mkdir($filepath, 0777, true);
+                    }
+ 
                     rename($fullPath_tmp, $fullPath);
                     if (file_exists($fullPath)) {
-                        $fileName_th=@$list_file_th[$i];
-                         
-                        $exec = $this->CI->tbl_filestore_Model->Create($file_store_code, $output_dir, $fileName, $this->staffid,$fileName_th);
+                        $fileName_th = @$list_file_th[$i];
+
+                        $exec = $this->CI->filestore_Model->Create($file_store_code, $filepath, $fileName, $this->staffid, $fileName_th);
                         $detail = array();
                         $detail['fileName'] = $fileName;
                         $detail['statusStore'] = $exec['message_status'];
@@ -310,15 +327,15 @@ class UploadUtils {
         if (isset($config['file_ext_allow'])) {
             $this->file_ext_allow = $config['file_ext_allow'];
         }
-        $this->file_store_code = $this->CI->session->userdata($this->SESSION_FILE_STORE_CODE);
+        $this->file_store_code = $this->CI->session->userdata(SESSION_FILE_STORE_CODE);
         $list_file = $this->CI->session->userdata(SESSION_FILE_LIST);
         if (!isset($list_file)) {
             $list_file = array();
         }
         $output_dir = $config['upload_path_tmp'] . DIRECTORY_SEPARATOR;
         // $list_file['DIR_UPLOAD'][]=$output_dir;
-      //  var_dump($_FILES);
-     //   exit();
+        //  var_dump($_FILES);
+        //   exit();
         if (isset($_FILES[$config['id']])) {
             $ret = array();
 //	This is for custom errors;	
@@ -338,7 +355,7 @@ class UploadUtils {
                 $fileName = $_FILES[$config['id']]["name"];
                 $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
                 if (in_array($ext, $this->file_ext_allow)) {
-                    $new_fileName = $this->CI->webutils->randomCode(25) . '.' . $ext;
+                    $new_fileName = $this->CI->web_utils->randomCode(25) . '.' . $ext;
                     move_uploaded_file($_FILES[$config['id']]["tmp_name"], $output_dir . $new_fileName);
                     $ret[] = $new_fileName;
                     $list_file['FILE_LIST'][] = $new_fileName;
@@ -358,7 +375,7 @@ class UploadUtils {
                     $fileName = $_FILES[$config['id']]["name"][$i];
                     $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
                     if (in_array($ext, $this->file_ext_allow)) {
-                        $new_fileName = $this->CI->webutils->randomCode(25) . '.' . $ext;
+                        $new_fileName = $this->CI->web_utils->randomCode(25) . '.' . $ext;
                         move_uploaded_file($_FILES[$config['id']]["tmp_name"][$i], $output_dir . $new_fileName);
                         $ret[] = $new_fileName;
                         $list_file['FILE_LIST'][] = $new_fileName;
@@ -375,22 +392,22 @@ class UploadUtils {
             $this->CI->session->set_userdata($user_data);
             return json_encode($ret);
         } else {
-                        $custom_error['jquery-upload-file-error'] = "error!..";
-                        return json_encode($custom_error);
+            $custom_error['jquery-upload-file-error'] = "error!..";
+            return json_encode($custom_error);
         }
     }
 
     public function viewer($file_url) {
-        //$file_path = site_url("Resource/showFile/".$this->CI->webutils->encrypt($file_url));
 
         $is_tmp = $this->CI->input->get('is_tmp');
-        $file_path = site_url($this->CI->webutils->decrypt($file_url));
+        
+        $file_path = site_url($this->CI->web_utils->decrypt($file_url));
         //  var_dump($file_path);
         //    exit();
 
         $html = "<!DOCTYPE html>
                 <html lang=\"en\"><head><meta charset=\"UTF-8\" /></head><body>
-                <script src='" . base_url() . "/assets/global/vendor/pdfobject/pdfobject.js'></script>
+                <script src='" . base_url() . "/assets/plugins/pdfobject/pdfobject.js'></script>
                     <script>
                         var options = {
                             pdfOpenParams: {view: 'Fit', pagemode: 'thumbs', scrollbar: '1', toolbar: '1', statusbar: '1'}

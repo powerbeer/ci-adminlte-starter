@@ -167,5 +167,56 @@ class WebUtils {
         }
         return $message;
     }
+    
+    
+    
+    public function decrypt($plain_text) {
+        //  var_dump($plain_text);
+        if ($this->is_base64($plain_text)) {
+            //  echo 'dddd';
+            // return base64_decode($plain_text . '==');
+            return base64_decode($plain_text);
+        } else {
+            return $plain_text;
+        }
+        //return $this->CI->encryption->decrypt($plain_text_base64);
+    }
+
+    public function encrypt($plain_text) {
+        // $plain_text_base64= $this->CI->encryption->encrypt($plain_text);
+        if (!$this->is_base64($plain_text)) {
+            // return str_replace('=', '', base64_encode($plain_text));
+            return base64_encode($plain_text);
+        } else {
+            return $plain_text;
+            // return str_replace('=', '', base64_encode($plain_text));
+        }
+    }
+
+    public function is_base64($data) {
+        $expl = explode("?", $data);
+        $data = @$expl[0];
+        $decoded_data = base64_decode($data, true);
+        $encoded_data = base64_encode($decoded_data);
+        if ($encoded_data != $data)
+            return false;
+        else if (!ctype_print($decoded_data))
+            return false;
+
+        return true;
+    }
+
+    public function is_base64_encode($data) {
+        $expl = explode("?", $data);
+        $data = @$expl[0];
+        return is_base64($data) ? $data : base64_encode($data);
+    }
+
+    public function is_base64_decode($data) {
+        $expl = explode("?", $data);
+        $data = @$expl[0];
+        return is_base64($data) ? base64_decode($data) : $data;
+    }
+
  
 }
